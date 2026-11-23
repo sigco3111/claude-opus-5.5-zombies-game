@@ -379,7 +379,7 @@ export function signTexture(lines: string[], opts: { bg: string; fg: string; w?:
   const lh = (h * 0.62) / lines.length;
   lines.forEach((l, i) => {
     const size = i === 0 ? lh * 0.8 : lh * 0.55;
-    ctx.font = `bold ${size}px ${opts.font ?? '"DIN Alternate","Arial Narrow",Arial,sans-serif'}`;
+    ctx.font = `bold ${size}px ${opts.font ?? '"DIN Alternate","Arial Narrow",Arial,"Noto Sans KR","Malgun Gothic",sans-serif'}`;
     const y = h / 2 + (i - (lines.length - 1) / 2) * lh;
     ctx.fillText(l, textX, y, w * 0.8 - (textX - w / 2));
   });
