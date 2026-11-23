@@ -10,7 +10,7 @@
   --panel: rgba(12, 15, 16, 0.72);
   --panel-solid: rgba(12, 15, 16, 0.92);
   --line: rgba(233, 230, 220, 0.16);
-  --font: "DIN Alternate", "Bahnschrift", "Avenir Next Condensed", "Roboto Condensed", "Arial Narrow", Arial, sans-serif;
+  --font: "DIN Alternate", "Bahnschrift", "Avenir Next Condensed", "Roboto Condensed", "Arial Narrow", Arial, "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", sans-serif;
   --mono: "SF Mono", Menlo, Consolas, monospace;
 }
 
