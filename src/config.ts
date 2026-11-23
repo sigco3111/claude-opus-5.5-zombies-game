@@ -165,7 +165,7 @@ export const WEAPONS: Record<WeaponId, WeaponDef> = {
 
 /** Upgrade tiers: index 0 = base. */
 export const UPGRADE_TIERS = [
-  { name: 'STOCK', damageMult: 1, magMult: 1, reloadMult: 1, rpmMult: 1, spreadMult: 1, cost: 0 },
+  { name: '기본', damageMult: 1, magMult: 1, reloadMult: 1, rpmMult: 1, spreadMult: 1, cost: 0 },
   { name: 'TIER I', damageMult: 1.65, magMult: 1.25, reloadMult: 0.85, rpmMult: 1.08, spreadMult: 0.85, cost: 2500 },
   { name: 'TIER II', damageMult: 2.5, magMult: 1.5, reloadMult: 0.7, rpmMult: 1.15, spreadMult: 0.7, cost: 5000 },
 ];
@@ -207,17 +207,17 @@ export interface RegionDef {
 
 export const REGIONS: Record<RegionId, RegionDef> = {
   low: {
-    id: 'low', label: 'CHECKPOINT DISTRICT', threat: 'LOW THREAT', hpMult: 1, damageMult: 1, rewardMult: 1,
+    id: 'low', label: '체크포인트 구역', threat: '위협 낮음', hpMult: 1, damageMult: 1, rewardMult: 1,
     maxAlive: 10, spawnInterval: 3.2, weights: { shambler: 0.82, runner: 0.18, armored: 0 },
     initialPopulation: 7, color: '#8fb573',
   },
   medium: {
-    id: 'medium', label: 'KESSLER FREIGHT DEPOT', threat: 'MEDIUM THREAT', hpMult: 1.35, damageMult: 1.25, rewardMult: 1.6,
+    id: 'medium', label: '케슬러 수송기지', threat: '위협 보통', hpMult: 1.35, damageMult: 1.25, rewardMult: 1.6,
     maxAlive: 18, spawnInterval: 1.9, weights: { shambler: 0.52, runner: 0.36, armored: 0.12 },
     initialPopulation: 11, color: '#d8a64a',
   },
   high: {
-    id: 'high', label: 'HALCYON RESEARCH COMPOUND', threat: 'HIGH THREAT', hpMult: 1.8, damageMult: 1.5, rewardMult: 2.4,
+    id: 'high', label: '할시온 연구단지', threat: '위협 높음', hpMult: 1.8, damageMult: 1.5, rewardMult: 2.4,
     maxAlive: 26, spawnInterval: 1.15, weights: { shambler: 0.3, runner: 0.42, armored: 0.28 },
     initialPopulation: 13, color: '#d0473c',
   },
