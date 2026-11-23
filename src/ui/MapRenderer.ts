@@ -71,12 +71,12 @@ export class MapRenderer {
     ctx.arc(this.toX(r.x), this.toY(r.z), 9 * PX, 0, Math.PI * 2);
     ctx.fill();
     // Region labels
-    ctx.font = 'bold 22px "DIN Alternate","Arial Narrow",sans-serif';
+    ctx.font = 'bold 22px "DIN Alternate","Arial Narrow","Noto Sans KR","Malgun Gothic",sans-serif';
     ctx.fillStyle = 'rgba(230,230,220,0.35)';
     ctx.textAlign = 'center';
-    ctx.fillText('HALCYON COMPOUND', this.toX(0), this.toY(-100));
-    ctx.fillText('KESSLER DEPOT', this.toX(-40), this.toY(-18.5) + 8);
-    ctx.fillText('CHECKPOINT 7', this.toX(0), this.toY(96));
+    ctx.fillText('할시온 컴파운드', this.toX(0), this.toY(-100));
+    ctx.fillText('케슬러 기지', this.toX(-40), this.toY(-18.5) + 8);
+    ctx.fillText('체크포인트 7', this.toX(0), this.toY(96));
   }
 
   private toX(x: number): number { return (x - WORLD.minX) * PX; }
