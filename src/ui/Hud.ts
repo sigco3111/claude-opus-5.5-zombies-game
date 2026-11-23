@@ -205,7 +205,7 @@ export class Hud {
     this.set('timer', 'class', f.finalPhase || f.remaining < 90 ? 'urgent' : '');
     this.set('timer-label', 'text', f.timerLabel);
     this.set('phase-banner', 'display', f.finalPhase ? 'block' : 'none');
-    this.set('phase-banner', 'text', f.toxic ? 'CONTAMINATED · GET OUT' : 'CONTAMINATION SPREADING');
+    this.set('phase-banner', 'text', f.toxic ? '오염 지역 · 벗어나세요' : '오염 확산 중');
     this.set('contracts', 'html', f.contracts.map((c) => `<div class="contract ${c.state === 'done' ? 'done' : c.state === 'locked' ? 'locked' : ''}">
       <div class="c-title"><span>${c.title}</span><span class="tag">${c.tag}</span></div>
       <div class="c-sub ${c.warn ? 'warn' : ''}">${c.sub}</div>
@@ -249,7 +249,7 @@ export class Hud {
     this.set('ammo-res', 'text', String(f.reserve));
     this.set('weapon-secondary', 'text', f.secondary);
     this.set('reload-hint', 'display', !f.reloading && f.mag <= Math.ceil(f.magSize * 0.25) && f.reserve > 0 ? 'block' : 'none');
-    this.set('reload-hint', 'text', f.mag === 0 ? 'RELOAD  [R]' : 'LOW AMMO  [R]');
+    this.set('reload-hint', 'text', f.mag === 0 ? '재장전  [R]' : '탄약 부족  [R]');
     // Crosshair: hidden while aiming, gap follows spread
     const ch = $('crosshair');
     const op = String(Math.max(0, 1 - f.adsT * 2.5) * (f.sprinting ? 0.25 : 1));
