@@ -74,29 +74,29 @@ export class Menus {
 
   private renderBest(): void {
     const b = this.game.bestRun;
-    $('best-run').textContent = b ? `BEST EXTRACTION  ${fmt(b.time)}  ·  ${b.kills} KILLS  ·  ${b.headshots} HEADSHOTS` : '';
+    $('best-run').textContent = b ? `최고 기록  ${fmt(b.time)}  ·  처치 ${b.kills}  ·  헤드샷 ${b.headshots}` : '';
   }
 
   showResults(outcome: 'victory' | 'dead' | 'timeout', s: ResultStats, record: boolean, best: BestRun | null): void {
     const title = $('result-title');
-    title.textContent = outcome === 'victory' ? 'EXTRACTED' : outcome === 'dead' ? 'KILLED IN ACTION' : 'ZONE LOST';
+    title.textContent = outcome === 'victory' ? '탈출 성공' : outcome === 'dead' ? '전사' : '구역 상실';
     title.className = outcome === 'victory' ? 'win' : 'lose';
-    $('result-kicker').textContent = outcome === 'victory' ? 'MISSION REPORT · SUCCESS' : 'MISSION REPORT · FAILURE';
+    $('result-kicker').textContent = outcome === 'victory' ? '작전 보고 · 성공' : '작전 보고 · 실패';
     $('result-sub').textContent = outcome === 'victory'
-      ? 'RAVEN 2-1 cleared the district with you aboard. The uplink data and the WARDEN-9 confirmation made it out.'
+      ? 'RAVEN 2-1이 당신을 태우고 구역을 벗어났습니다. 업링크 데이터와 WARDEN-9 제거 확인이 무사히 전달되었습니다.'
       : outcome === 'dead'
-        ? 'Your signal went dark inside the exclusion zone. Recovery teams will not be sent.'
-        : 'The contamination front swallowed the landing zone before you could get out.';
+        ? '당신의 신호가 격리 구역 안에서 끊겼습니다. 구조대는 투입되지 않습니다.'
+        : '탈출하기 전에 오염 전선이 착륙 지점을 집어삼켰습니다.';
     const cells: [string, string][] = [
-      ['OUTCOME', outcome === 'victory' ? 'SUCCESS' : 'FAILED'],
-      ['SURVIVAL TIME', fmt(s.time)],
-      ['CONTRACTS', `${s.contracts} / 2`],
-      ['KILLS', String(s.kills)],
-      ['HEADSHOTS', String(s.headshots)],
-      ['ACCURACY', `${Math.round(s.accuracy * 100)}%`],
-      ['SALVAGE EARNED', `$${s.salvage.toLocaleString('en-US')}`],
-      ['CACHES LOOTED', String(s.caches)],
-      ['EXTRACTED', outcome === 'victory' ? 'YES' : 'NO'],
+      ['결과', outcome === 'victory' ? '성공' : '실패'],
+      ['생존 시간', fmt(s.time)],
+      ['계약', `${s.contracts} / 2`],
+      ['처치', String(s.kills)],
+      ['헤드샷', String(s.headshots)],
+      ['명중률', `${Math.round(s.accuracy * 100)}%`],
+      ['획득 전리품', `$${s.salvage.toLocaleString('en-US')}`],
+      ['보급품 캐시', String(s.caches)],
+      ['탈출', outcome === 'victory' ? '예' : '아니오'],
     ];
     const grid = $('result-stats');
     grid.replaceChildren(...cells.map(([k, v]) => {
@@ -107,7 +107,7 @@ export class Menus {
       d.append(vv, kk);
       return d;
     }));
-    $('result-best').textContent = record ? 'NEW BEST EXTRACTION TIME' : best ? `BEST EXTRACTION  ${fmt(best.time)}` : '';
+    $('result-best').textContent = record ? '최고 탈출 기록 경신' : best ? `최고 기록  ${fmt(best.time)}` : '';
     this.showScreen('results');
   }
 }
