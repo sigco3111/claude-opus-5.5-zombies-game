@@ -1069,4 +1069,4 @@ export class Game {
   cancelPlate(): void {
     cancelPlate(this.player.vitals);
   }
-      }
+}
