@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="en">
+<html lang="ko">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dead Signal: Exclusion Zone</title>
-    <meta name="description" content="A first-person extraction survival shooter set in a quarantined industrial district." />
+    <title>데드 시그널: 엑스클루전 존</title>
+    <meta name="description" content="격리된 산업 지역을 무대로 한 1인칭 탈출 서바이벌 슈터." />
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23111'/%3E%3Cpath d='M16 4 L28 26 H4 Z' fill='none' stroke='%23e8c35a' stroke-width='3'/%3E%3Ccircle cx='16' cy='20' r='2.5' fill='%23e8c35a'/%3E%3C/svg%3E" />
   </head>
   <body>
@@ -15,14 +15,14 @@
       <div class="load-inner">
         <div class="brand-small">DEAD SIGNAL</div>
         <div class="load-bar"><div id="load-fill"></div></div>
-        <div id="load-text">ESTABLISHING UPLINK…</div>
+        <div id="load-text">업링크 연결 중…</div>
       </div>
     </div>
 
     <!-- Error -->
     <div id="error" class="screen hidden">
       <div class="panel error-panel">
-        <h2>UNABLE TO DEPLOY</h2>
+        <h2>게임을 시작할 수 없습니다</h2>
         <p id="error-text"></p>
       </div>
     </div>
@@ -30,46 +30,46 @@
     <!-- Title -->
     <div id="title" class="screen hidden">
       <div class="title-left">
-        <div class="title-kicker">JOINT TASK FORCE ARGUS · OPERATION BLACKWATER</div>
+        <div class="title-kicker">합동 특수임무부대 아르구스 · 블랙워터 작전</div>
         <h1 class="title-logo">DEAD SIGNAL</h1>
-        <div class="title-sub">EXCLUSION ZONE</div>
+        <div class="title-sub">엑스클루전 존</div>
         <p class="briefing">
-          The Halcyon outbreak has overrun District 9. Insert at Checkpoint 7, restore the depot uplink,
-          eliminate the escaped subject <b>WARDEN-9</b>, then signal <b>RAVEN 2-1</b> for extraction before the
-          contamination front reaches the landing zone.
+          할시온 발병 사태가 제9구역을 집어삼켰습니다. 체크포인트 7에 투입되어 기지 업링크를 복구하고,
+          탈출한 실험체 <b>WARDEN-9</b>을 제거한 뒤, 오염 전선이 착륙 지점에 도달하기 전에
+          <b>RAVEN 2-1</b>을 불러 탈출하세요.
         </p>
         <div class="menu-buttons">
-          <button id="btn-deploy" class="btn primary">DEPLOY</button>
-          <button id="btn-settings" class="btn">SETTINGS</button>
+          <button id="btn-deploy" class="btn primary">출동</button>
+          <button id="btn-settings" class="btn">설정</button>
         </div>
         <div id="best-run" class="best-run"></div>
       </div>
       <div class="title-right">
         <div class="controls-card">
-          <div class="card-head">CONTROLS</div>
+          <div class="card-head">조작법</div>
           <div class="controls-grid">
-            <span>WASD</span><span>Move</span>
-            <span>Mouse</span><span>Look</span>
-            <span>LMB / RMB</span><span>Fire / Aim</span>
-            <span>R</span><span>Reload</span>
-            <span>Shift</span><span>Sprint</span>
-            <span>Space / C</span><span>Jump / Crouch</span>
-            <span>E</span><span>Interact</span>
-            <span>1 / 2 · Wheel</span><span>Switch weapon</span>
-            <span>G</span><span>Frag grenade</span>
-            <span>Q</span><span>Apply armor plate</span>
-            <span>M</span><span>Tactical map</span>
-            <span>Esc</span><span>Pause</span>
+            <span>WASD</span><span>이동</span>
+            <span>마우스</span><span>시점</span>
+            <span>LMB / RMB</span><span>사격 / 조준</span>
+            <span>R</span><span>재장전</span>
+            <span>Shift</span><span>질주</span>
+            <span>Space / C</span><span>점프 / 앉기</span>
+            <span>E</span><span>상호작용</span>
+            <span>1 / 2 · 휠</span><span>무기 전환</span>
+            <span>G</span><span>파열 수류탄</span>
+            <span>Q</span><span>방어판 적용</span>
+            <span>M</span><span>전술 지도</span>
+            <span>Esc</span><span>일시정지</span>
           </div>
         </div>
         <div class="controls-card">
-          <div class="card-head">MISSION</div>
+          <div class="card-head">임무</div>
           <ol class="mission-steps">
-            <li>Activate the <b>Uplink Relay</b> at Kessler Depot and hold its zone.</li>
-            <li>Hunt <b>WARDEN-9</b> inside the Halcyon Compound.</li>
-            <li>Call exfil at the <b>LZ</b>, survive the horde, board the helicopter.</li>
+            <li>케슬러 수송기지의 <b>업링크 중계기</b>를 가동하고 구역을 사수하세요.</li>
+            <li>할시온 컴파운드 안의 <b>WARDEN-9</b>을 사냥하세요.</li>
+            <li><b>LZ</b>에서 탈출 신호를 보내고, 떼거리를 막아낸 뒤 헬기에 탑승하세요.</li>
           </ol>
-          <div class="hint">Loot caches and kills earn Salvage. Spend it at Quartermaster stations and the Armory bench.</div>
+          <div class="hint">보급품 캐시 수색과 처치로 전리품을 얻습니다. 보급소와 무기고 개조대에서 사용하세요.</div>
         </div>
       </div>
     </div>
@@ -78,16 +78,16 @@
     <div id="hud" class="hidden">
       <div id="vignette-hit"></div>
       <div class="hud-tl">
-        <div class="timer-row"><span id="timer-label">MISSION</span><span id="timer">15:00</span></div>
-        <div id="phase-banner" class="phase-banner hidden">CONTAMINATION SPREADING</div>
+        <div class="timer-row"><span id="timer-label">미션</span><span id="timer">15:00</span></div>
+        <div id="phase-banner" class="phase-banner hidden">오염 확산 중</div>
         <div id="contracts"></div>
       </div>
       <div class="hud-tr">
         <canvas id="minimap" width="200" height="200"></canvas>
-        <div class="region-row"><span id="region-name">CHECKPOINT DISTRICT</span><span id="region-threat" class="threat low">LOW THREAT</span></div>
+        <div class="region-row"><span id="region-name">체크포인트 구역</span><span id="region-threat" class="threat low">위협 낮음</span></div>
       </div>
       <div id="boss" class="boss hidden">
-        <div class="boss-name">WARDEN-9 · ELITE INFECTED</div>
+        <div class="boss-name">WARDEN-9 · 정예 감염체</div>
         <div class="boss-bar"><div id="boss-fill"></div></div>
       </div>
       <div id="waypoints"></div>
@@ -100,31 +100,31 @@
       <div id="toasts"></div>
       <div id="center-msg" class="hidden"></div>
       <div id="stamina"><div id="stamina-fill"></div></div>
-      <div id="plate-bar" class="hidden"><div id="plate-fill"></div><span>APPLYING PLATE</span></div>
+      <div id="plate-bar" class="hidden"><div id="plate-fill"></div><span>방어판 적용 중</span></div>
       <div class="hud-bl">
         <div class="salvage"><span class="salvage-icon">$</span><span id="cash">500</span><span id="cash-delta"></span></div>
         <div class="armor-row" id="armor-row"><div class="seg"><i></i></div><div class="seg"><i></i></div><div class="seg"><i></i></div></div>
         <div class="health-row"><div id="health-fill"></div><span id="health-num">100</span></div>
         <div class="inv-row">
-          <span class="inv"><b id="plates">2</b> PLATES <kbd>Q</kbd></span>
-          <span class="inv"><b id="grenades">2</b> FRAG <kbd>G</kbd></span>
+          <span class="inv"><b id="plates">2</b> 방어판 <kbd>Q</kbd></span>
+          <span class="inv"><b id="grenades">2</b> 수류탄 <kbd>G</kbd></span>
         </div>
       </div>
       <div class="hud-br">
         <div id="weapon-secondary" class="weapon-secondary"></div>
         <div class="weapon-name"><span id="weapon-name">KR-7 KESTREL</span><span id="weapon-tier" class="tier"></span></div>
         <div class="ammo"><span id="ammo-mag">30</span><span class="ammo-sep">/</span><span id="ammo-res">150</span></div>
-        <div id="reload-hint" class="reload-hint hidden">RELOAD <kbd>R</kbd></div>
+        <div id="reload-hint" class="reload-hint hidden">재장전 <kbd>R</kbd></div>
       </div>
       <div id="station" class="station hidden">
-        <div class="station-head" id="station-title">QUARTERMASTER</div>
+        <div class="station-head" id="station-title">보급소</div>
         <div id="station-items"></div>
-        <div class="station-foot">Press the number key to buy · <kbd>E</kbd> close</div>
+        <div class="station-foot">숫자 키를 눌러 구매 · <kbd>E</kbd> 닫기</div>
       </div>
       <div id="controls-hint" class="controls-hint">
-        <div><kbd>WASD</kbd> move <kbd>Shift</kbd> sprint <kbd>C</kbd> crouch <kbd>Space</kbd> jump</div>
-        <div><kbd>LMB</kbd> fire <kbd>RMB</kbd> aim <kbd>R</kbd> reload <kbd>1</kbd>/<kbd>2</kbd> switch</div>
-        <div><kbd>E</kbd> interact <kbd>G</kbd> grenade <kbd>Q</kbd> plate <kbd>M</kbd> map <kbd>Esc</kbd> pause</div>
+        <div><kbd>WASD</kbd> 이동 <kbd>Shift</kbd> 질주 <kbd>C</kbd> 앉기 <kbd>Space</kbd> 점프</div>
+        <div><kbd>LMB</kbd> 사격 <kbd>RMB</kbd> 조준 <kbd>R</kbd> 재장전 <kbd>1</kbd>/<kbd>2</kbd> 전환</div>
+        <div><kbd>E</kbd> 상호작용 <kbd>G</kbd> 수류탄 <kbd>Q</kbd> 방어판 <kbd>M</kbd> 지도 <kbd>Esc</kbd> 일시정지</div>
       </div>
       <div id="fps" class="hidden"></div>
     </div>
@@ -132,23 +132,23 @@
     <!-- Tactical map -->
     <div id="tacmap" class="hidden">
       <div class="tacmap-head">
-        <span>TACTICAL MAP · DISTRICT 9</span>
-        <span class="legend"><i class="lg l"></i>LOW <i class="lg m"></i>MEDIUM <i class="lg h"></i>HIGH <i class="lg c"></i>CONTAMINATION</span>
-        <span class="legend"><b class="k buy">$</b> Quartermaster <b class="k up">U</b> Armory <b class="k ct">D</b> Uplink <b class="k lz">H</b> Exfil <b class="k cr"></b> Cache</span>
+        <span>전술 지도 · 제9구역</span>
+        <span class="legend"><i class="lg l"></i>낮음 <i class="lg m"></i>보통 <i class="lg h"></i>높음 <i class="lg c"></i>오염</span>
+        <span class="legend"><b class="k buy">$</b> 보급소 <b class="k up">U</b> 무기고 <b class="k ct">D</b> 업링크 <b class="k lz">H</b> 탈출 <b class="k cr"></b> 캐시</span>
       </div>
       <canvas id="tacmap-canvas"></canvas>
-      <div class="tacmap-foot">Press <kbd>M</kbd> to close</div>
+      <div class="tacmap-foot"><kbd>M</kbd>을 눌러 닫기</div>
     </div>
 
     <!-- Pause -->
     <div id="pause" class="screen hidden">
       <div class="panel pause-panel">
-        <div class="panel-head">PAUSED</div>
+        <div class="panel-head">일시정지</div>
         <div class="menu-buttons vertical">
-          <button id="btn-resume" class="btn primary">RESUME</button>
-          <button id="btn-pause-settings" class="btn">SETTINGS</button>
-          <button id="btn-restart" class="btn">RESTART MISSION</button>
-          <button id="btn-quit" class="btn">MAIN MENU</button>
+          <button id="btn-resume" class="btn primary">계속</button>
+          <button id="btn-pause-settings" class="btn">설정</button>
+          <button id="btn-restart" class="btn">미션 재시작</button>
+          <button id="btn-quit" class="btn">메인 메뉴</button>
         </div>
         <div id="resume-note" class="note"></div>
       </div>
@@ -157,30 +157,30 @@
     <!-- Settings -->
     <div id="settings" class="screen hidden">
       <div class="panel settings-panel">
-        <div class="panel-head">SETTINGS</div>
-        <label class="row"><span>Mouse sensitivity</span><input id="set-sens" type="range" min="0.2" max="3" step="0.05" /><output id="out-sens"></output></label>
-        <label class="row"><span>Field of view</span><input id="set-fov" type="range" min="60" max="100" step="1" /><output id="out-fov"></output></label>
-        <label class="row"><span>Master volume</span><input id="set-vol" type="range" min="0" max="1" step="0.05" /><output id="out-vol"></output></label>
-        <label class="row"><span>Graphics quality</span>
-          <select id="set-quality"><option value="low">Low (no shadows / bloom)</option><option value="medium">Medium</option><option value="high">High</option></select><output></output></label>
-        <label class="row"><span>Render scale</span><input id="set-scale" type="range" min="0.5" max="1" step="0.05" /><output id="out-scale"></output></label>
-        <label class="row check"><span>Reduced motion</span><input id="set-motion" type="checkbox" /><output></output></label>
-        <label class="row check"><span>Show FPS</span><input id="set-fps" type="checkbox" /><output></output></label>
-        <div class="menu-buttons"><button id="btn-settings-back" class="btn primary">BACK</button></div>
+        <div class="panel-head">설정</div>
+        <label class="row"><span>마우스 감도</span><input id="set-sens" type="range" min="0.2" max="3" step="0.05" /><output id="out-sens"></output></label>
+        <label class="row"><span>시야각</span><input id="set-fov" type="range" min="60" max="100" step="1" /><output id="out-fov"></output></label>
+        <label class="row"><span>전체 음량</span><input id="set-vol" type="range" min="0" max="1" step="0.05" /><output id="out-vol"></output></label>
+        <label class="row"><span>그래픽 품질</span>
+          <select id="set-quality"><option value="low">낮음 (그림자 / 블룸 없음)</option><option value="medium">보통</option><option value="high">높음</option></select><output></output></label>
+        <label class="row"><span>렌더링 해상도</span><input id="set-scale" type="range" min="0.5" max="1" step="0.05" /><output id="out-scale"></output></label>
+        <label class="row check"><span>움직임 줄이기</span><input id="set-motion" type="checkbox" /><output></output></label>
+        <label class="row check"><span>FPS 표시</span><input id="set-fps" type="checkbox" /><output></output></label>
+        <div class="menu-buttons"><button id="btn-settings-back" class="btn primary">뒤로</button></div>
       </div>
     </div>
 
     <!-- Results -->
     <div id="results" class="screen hidden">
       <div class="panel results-panel">
-        <div id="result-kicker" class="title-kicker">MISSION REPORT</div>
-        <h2 id="result-title">EXTRACTED</h2>
+        <div id="result-kicker" class="title-kicker">작전 보고</div>
+        <h2 id="result-title">탈출 성공</h2>
         <div id="result-sub" class="result-sub"></div>
         <div class="stats-grid" id="result-stats"></div>
         <div id="result-best" class="best-run"></div>
         <div class="menu-buttons">
-          <button id="btn-again" class="btn primary">REDEPLOY</button>
-          <button id="btn-menu" class="btn">MAIN MENU</button>
+          <button id="btn-again" class="btn primary">재출동</button>
+          <button id="btn-menu" class="btn">메인 메뉴</button>
         </div>
       </div>
     </div>
