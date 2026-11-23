@@ -90,13 +90,13 @@ export class Game {
   constructor(container: HTMLElement, onProgress: (p: number, label: string) => void) {
     this.settings = loadSettings();
     this.renderer = new Renderer(container);
-    onProgress(0.15, 'GENERATING SURFACES…');
+    onProgress(0.15, '지형 생성 중…');
     this.tex.build();
     this.M = new Materials(this.tex);
-    onProgress(0.4, 'MAPPING DISTRICT 9…');
+    onProgress(0.4, '제9구역 구성 중…');
     this.level = new Level(this.M);
     this.renderer.scene.add(this.level.root);
-    onProgress(0.65, 'ARMING LOADOUT…');
+    onProgress(0.65, '장비 준비 중…');
     this.vm = new ViewModel(this.tex);
     this.renderer.setViewModel(this.vm.scene, this.vm.camera);
     this.renderer.showViewModel(false); // enabled on deploy
@@ -115,7 +115,7 @@ export class Game {
     this.renderer.scene.add(this.heli.group);
     this.contamWall = this.buildContaminationWall();
     this.renderer.scene.add(this.contamWall);
-    onProgress(0.85, 'SYNCHRONISING…');
+    onProgress(0.85, '동기화 중…');
     this.map = new MapRenderer(this.level);
     this.hud = new Hud(this.map);
     this.input = new Input(this.renderer.renderer.domElement);
@@ -134,7 +134,7 @@ export class Game {
     };
     window.addEventListener('resize', () => this.onResize());
     this.onResize();
-    onProgress(1, 'READY');
+    onProgress(1, '준비 완료');
     this.last = performance.now();
     this.rafId = requestAnimationFrame(this.loop);
   }
@@ -194,7 +194,7 @@ export class Game {
     this.renderer.showViewModel(true);
     this.last = performance.now();
     const ok = await this.input.requestLock();
-    if (!ok && !this.input.virtualLock) this.pause('Click RESUME to lock the mouse and continue.');
+    if (!ok && !this.input.virtualLock) this.pause('계속을 눌러 마우스를 잠그고 이어서 플레이하세요.');
   }
 
   pause(note = ''): void {
@@ -212,7 +212,7 @@ export class Game {
     this.audio.resume();
     const ok = await this.input.requestLock();
     if (!ok && !this.input.virtualLock) {
-      this.menus.setResumeNote('The browser blocked the mouse lock — wait a moment and click RESUME again.');
+      this.menus.setResumeNote('브라우저가 마우스 잠금을 차단했습니다. 잠시 후 계속을 다시 눌러주세요.');
       return;
     }
     if (this.input.virtualLock) this.onLockChange(true);
@@ -313,7 +313,7 @@ export class Game {
     if (this.frameTimes.length > 600) this.frameTimes.shift();
     if (this.fpsTime >= 0.5) {
       const fps = this.fpsFrames / this.fpsTime;
-      this.fpsText = `${fps.toFixed(0)} FPS · ${(1000 / fps).toFixed(1)} ms · ${this.enemies.aliveCount} infected`;
+      this.fpsText = `${fps.toFixed(0)} FPS · ${(1000 / fps).toFixed(1)} ms · ${this.enemies.aliveCount} 감염체`;
       this.fpsFrames = 0;
       this.fpsTime = 0;
     }
@@ -355,7 +355,7 @@ export class Game {
         if (w) cancelReload(w);
         this.audio.plate('start');
       } else if (v.plateT <= 0) {
-        this.hud.toast(v.plates <= 0 ? 'NO ARMOR PLATES' : v.armor >= maxArmor() ? 'ARMOR FULL' : 'CANNOT PLATE NOW', 'bad', '', 1.4);
+        this.hud.toast(v.plates <= 0 ? '방어판 없음' : v.armor >= maxArmor() ? '방어구 가득' : '지금은 방어판을 적용할 수 없음', 'bad', '', 1.4);
         this.audio.ui('deny');
       }
     }
@@ -391,7 +391,7 @@ export class Game {
         this.weapons.throwT = 0.5;
         this.audio.grenadePin();
       } else if (this.loadout.grenades <= 0) {
-        this.hud.toast('NO GRENADES', 'bad', '', 1.2);
+        this.hud.toast('수류탄 없음', 'bad', '', 1.2);
       }
     }
     const blasts = this.grenades.update(dt, world, (x, z) => this.audio.grenadeBounce({ x, z }));
@@ -420,7 +420,7 @@ export class Game {
     const el = this.enemies.elite;
     if (el && el.alive && !this.eliteNotified && (this.enemies.eliteAggro || Math.hypot(el.pos.x - p.pos.x, el.pos.z - p.pos.z) < 30)) {
       this.eliteNotified = true;
-      this.hud.toast('WARDEN-9 SIGHTED', 'bad', 'Heavily armoured · break the helmet, then go for the head', 3.5);
+      this.hud.toast('WARDEN-9 발견', 'bad', '중장갑 · 헬멧을 벗긴 뒤 머리를 노리세요', 3.5);
       this.audio.ui('alert');
     }
 
@@ -433,7 +433,7 @@ export class Game {
     if (drops > 0) {
       for (const s of this.loadout.slots) if (s) addReserve(s, effectiveStats(s.id, s.tier).magSize);
       this.audio.ui('pickup');
-      this.hud.toast('AMMO RECOVERED', '', '', 1.2);
+      this.hud.toast('탄약 회수', '', '', 1.2);
     }
 
     // Defeat checks
@@ -510,19 +510,19 @@ export class Game {
         if (this.mission.defense.activate()) {
           this.level.defenseRing.visible = true;
           this.audio.ui('contract');
-          this.hud.toast('UPLINK RELAY ONLINE', 'big', 'Hold the marked zone while it transmits', 3.5);
+          this.hud.toast('업링크 중계기 가동', 'big', '전송이 끝날 때까지 표시된 구역을 지키세요', 3.5);
           this.enemies.noise(this.player.pos.x, this.player.pos.z, 70);
         }
         break;
       case 'radio': {
         const ex = this.mission.extraction;
         if (ex.state === 'locked') {
-          this.hud.toast('EXTRACTION UNAVAILABLE', 'bad', 'Complete both contracts first', 2.2);
+          this.hud.toast('탈출 불가', 'bad', '먼저 두 계약을 모두 완료하세요', 2.2);
           this.audio.ui('deny');
         } else if (ex.call({ x: this.player.pos.x, z: this.player.pos.z })) {
           this.audio.ui('radio');
           this.audio.startHeli();
-          this.hud.toast('RAVEN 2-1 INBOUND', 'big', `Hold the LZ · ETA ${MISSION.extractionCountdown}s`, 4);
+          this.hud.toast('RAVEN 2-1 접근 중', 'big', `LZ 사수 · 도착까지 ${MISSION.extractionCountdown}초`, 4);
           this.enemies.noise(this.player.pos.x, this.player.pos.z, 120);
         }
         break;
@@ -550,11 +550,20 @@ export class Game {
     addCash(this.loadout, cash);
     this.mission.stats.salvageEarned += cash;
     this.mission.stats.cratesLooted++;
-    const parts = [`+$${cash}`, `AMMO`];
-    if (plates) parts.push(`+${plates} PLATE${plates > 1 ? 'S' : ''}`);
-    if (gren) parts.push(`+${gren} FRAG`);
-    this.hud.toast('SUPPLY CACHE', 'good', parts.join('  ·  '), 2.6);
+    const parts = [`+$${cash}`, `탄약`];
+    if (plates) parts.push(`+방어판 ${plates}개`);
+    if (gren) parts.push(`+수류탄 ${gren}개`);
+    this.hud.toast('보급품 캐시', 'good', parts.join('  ·  '), 2.6);
     this.audio.ui('loot');
+  }
+
+  private reasonText(r: string): string {
+    const map: Record<string, string> = {
+      'MAX TIER': '최고 단계', 'UNAVAILABLE': '구매 불가', 'AMMO FULL': '탄약 가득',
+      'PLATES FULL': '방어판 가득', 'GRENADES FULL': '수류탄 가득', 'OWNED': '보유 중',
+      'INSUFFICIENT SALVAGE': '전리품 부족', 'EMPTY SLOT': '빈 슬롯',
+    };
+    return map[r] ?? r;
   }
 
   private stationItems(): { id: PurchaseId; view: StationItemView }[] {
@@ -563,27 +572,27 @@ export class Game {
     const mk = (id: PurchaseId, key: string, name: string, desc: string) => {
       const cost = purchaseCost(l, id);
       const val = validatePurchase(l, v, id);
-      return { id, view: { key, name, desc, price: cost === null ? 'MAX' : val.ok ? `$${cost}` : val.reason === 'INSUFFICIENT SALVAGE' ? `$${cost}` : val.reason!, enabled: val.ok } };
+      return { id, view: { key, name, desc, price: cost === null ? '최고 단계' : val.ok ? `$${cost}` : val.reason === 'INSUFFICIENT SALVAGE' ? `$${cost}` : this.reasonText(val.reason!), enabled: val.ok } };
     };
     if (this.station === 'buy') {
       const hasShotgun = l.slots.some((s) => s?.id === 'shotgun');
       return [
-        mk('ammo', '3', 'AMMO RESUPPLY', 'Refill reserves for both weapons'),
-        mk('plate', '4', 'ARMOR PLATE', `Carry up to ${PLAYER.maxPlateInventory} · apply with Q`),
-        mk('grenade', '5', 'FRAG GRENADE', `Carry up to ${PLAYER.maxGrenades}`),
-        mk('shotgun', '6', WEAPONS.shotgun.name, hasShotgun ? 'Already equipped' : l.slots[1] ? 'Pump shotgun · replaces held weapon' : 'Pump shotgun · 9 pellets'),
+        mk('ammo', '3', '탄약 보급', '두 무기의 예비 탄약 보충'),
+        mk('plate', '4', '방어판', `최대 ${PLAYER.maxPlateInventory}개 소지 · Q로 적용`),
+        mk('grenade', '5', '파열 수류탄', `최대 ${PLAYER.maxGrenades}개 소지`),
+        mk('shotgun', '6', WEAPONS.shotgun.name, hasShotgun ? '이미 장비함' : l.slots[1] ? '펌프 산탄총 · 들고 있는 무기와 교체' : '펌프 산탄총 · 9펠릿'),
       ];
     }
     const name = (i: 0 | 1) => {
       const s = l.slots[i];
-      if (!s) return 'EMPTY SLOT';
+      if (!s) return '빈 슬롯';
       return WEAPONS[s.id].name;
     };
     const desc = (i: 0 | 1) => {
       const s = l.slots[i];
       if (!s) return '';
       const c = upgradeCost(s);
-      return c === null ? 'Fully upgraded' : `→ ${s.tier === 0 ? 'TIER I' : 'TIER II'}: more damage, bigger mags, faster reloads`;
+      return c === null ? '최고 단계까지 강화됨' : `→ ${s.tier === 0 ? 'TIER I' : 'TIER II'}: 피해 증가, 탄창 확장, 재장전 단축`;
     };
     return [mk('upgrade0', '3', name(0), desc(0)), mk('upgrade1', '4', name(1), desc(1))];
   }
@@ -608,22 +617,22 @@ export class Game {
           this.vm.setTier(w.id, w.tier);
           this.audio.ui('upgrade');
           this.fx.sparkBurst(this.player.pos.x, 1.2, this.player.pos.z, 20, w.tier === 1 ? [0.4, 0.8, 1.6] : [1.6, 0.5, 0.2]);
-          this.hud.toast(`${WEAPONS[w.id].name} UPGRADED`, 'big', w.tier === 1 ? 'TIER I · damage x1.65 · +25% magazine' : 'TIER II · damage x2.5 · +50% magazine', 3);
+          this.hud.toast(`${WEAPONS[w.id].name} 강화 완료`, 'big', w.tier === 1 ? 'TIER I · 피해 x1.65 · 탄창 +25%' : 'TIER II · 피해 x2.5 · 탄창 +50%', 3);
         } else {
           this.audio.ui('buy');
           if (it.id === 'shotgun') {
             const replaced = before.find((id) => id && !this.loadout.slots.some((s) => s?.id === id));
             this.weapons.syncModel();
-            this.hud.toast(`${WEAPONS.shotgun.name} ACQUIRED`, 'good', replaced ? `Replaced ${WEAPONS[replaced as WeaponId].shortName}` : '', 2.5);
+            this.hud.toast(`${WEAPONS.shotgun.name} 획득`, 'good', replaced ? `${WEAPONS[replaced as WeaponId].shortName} 교체됨` : '', 2.5);
           }
         }
       } else {
         this.hud.flashStation(i, false);
         this.audio.ui('deny');
-        this.hud.toast(r.reason ?? 'UNAVAILABLE', 'bad', '', 1.2);
+        this.hud.toast(this.reasonText(r.reason ?? 'UNAVAILABLE'), 'bad', '', 1.2);
       }
     });
-    this.hud.setStation(items.map((i) => i.view), this.station === 'buy' ? 'QUARTERMASTER STATION' : 'ARMORY UPGRADE BENCH');
+    this.hud.setStation(items.map((i) => i.view), this.station === 'buy' ? '보급소' : '무기고 개조대');
   }
 
   // ------------------------------------------------------------------------------------------
@@ -638,7 +647,7 @@ export class Game {
         addCash(this.loadout, MISSION.huntReward);
         this.mission.stats.salvageEarned += MISSION.huntReward;
         this.player.vitals.plates = Math.min(PLAYER.maxPlateInventory, this.player.vitals.plates + 2);
-        this.hud.toast('CONTRACT COMPLETE · WARDEN-9 ELIMINATED', 'big', `+$${MISSION.huntReward}  ·  +2 PLATES`, 4);
+        this.hud.toast('계약 완료 · WARDEN-9 제거', 'big', `+$${MISSION.huntReward}  ·  +방어판 2개`, 4);
         this.audio.ui('complete');
       }
       return;
@@ -656,7 +665,7 @@ export class Game {
     this.hud.damageFrom(fromX, fromZ, heavy);
     if (r.armorBroke) {
       this.audio.armorBreak();
-      if (this.realTime - this.lastBreakToast > 2) { this.lastBreakToast = this.realTime; this.hud.toast('ARMOR PLATE BROKEN', 'bad', '', 1.2); }
+      if (this.realTime - this.lastBreakToast > 2) { this.lastBreakToast = this.realTime; this.hud.toast('방어판 파괴됨', 'bad', '', 1.2); }
     }
     this.audio.hurt(heavy);
     if (!this.settings.reducedMotion) this.fx.shake = Math.max(this.fx.shake, heavy ? 0.25 : 0.12);
@@ -669,24 +678,24 @@ export class Game {
         this.mission.stats.salvageEarned += MISSION.defenseReward;
         for (const s of this.loadout.slots) if (s) addReserve(s, Infinity);
         this.level.defenseRing.visible = false;
-        this.hud.toast('CONTRACT COMPLETE · UPLINK RESTORED', 'big', `+$${MISSION.defenseReward}  ·  AMMO REFILLED`, 4);
+        this.hud.toast('계약 완료 · 업링크 복구', 'big', `+$${MISSION.defenseReward}  ·  탄약 보충 완료`, 4);
         this.audio.ui('complete');
         break;
       case 'huntComplete':
         break;
       case 'extractionUnlocked':
-        this.hud.toast('EXTRACTION AVAILABLE', 'big', 'Reach the LZ and signal RAVEN 2-1', 4.5);
+        this.hud.toast('탈출 가능', 'big', 'LZ로 이동해 RAVEN 2-1에 신호를 보내세요', 4.5);
         this.audio.ui('radio');
         break;
       case 'finalPhase':
         this.contamWall.visible = true;
-        this.hud.toast('CONTAMINATION BREACH', 'bad', e.forced ? 'The compound is venting · finish the contracts fast' : 'The front is spreading from the compound · get to the LZ', 4.5);
+        this.hud.toast('오염 유출', 'bad', e.forced ? '컴파운드에서 오염이 새어 나옵니다 · 서둘러 계약을 완료하세요' : '컴파운드에서 오염 전선이 확산 중 · LZ로 이동하세요', 4.5);
         this.audio.ui('alert');
         break;
       case 'heliLanded':
         if (!this.landedAnnounced) {
           this.landedAnnounced = true;
-          this.hud.toast('RAVEN 2-1 ON THE GROUND', 'big', 'Get to the helicopter door and press E', 4);
+          this.hud.toast('RAVEN 2-1 착륙', 'big', '헬기 문으로 가서 E를 누르세요', 4);
           this.audio.ui('radio');
         }
         break;
@@ -705,7 +714,7 @@ export class Game {
     this.hud.setStation(null, '');
     this.input.releaseLock();
     this.renderer.showViewModel(false);
-    this.hud.centerMessage('K.I.A.');
+    this.hud.centerMessage('전사');
     this.audio.hurt(true);
   }
 
@@ -715,7 +724,7 @@ export class Game {
     this.dyingT = 0;
     this.input.releaseLock();
     this.renderer.showViewModel(false);
-    this.hud.centerMessage('ZONE LOST');
+    this.hud.centerMessage('구역 상실');
   }
 
   private onVictory(): void {
@@ -874,22 +883,22 @@ export class Game {
     const contracts: ContractView[] = [];
     const d = m.defense;
     contracts.push({
-      title: 'DEFEND UPLINK RELAY', tag: d.status === 'complete' ? 'COMPLETE' : 'CONTRACT',
-      sub: d.status === 'inactive' ? 'Activate the relay at Kessler Depot [E]' : d.status === 'complete' ? 'Uplink restored' : d.inZone ? `Transmitting… ${Math.round(d.progress * 100)}%` : 'RETURN TO THE RELAY ZONE',
+      title: '업링크 중계기 방어', tag: d.status === 'complete' ? '완료' : '계약',
+      sub: d.status === 'inactive' ? '케슬러 수송기지에서 중계기 가동 [E]' : d.status === 'complete' ? '업링크 복구됨' : d.inZone ? `전송 중… ${Math.round(d.progress * 100)}%` : '중계 구역으로 복귀하세요',
       warn: d.status === 'active' && !d.inZone, progress: d.status === 'active' ? d.progress : undefined,
       state: d.status === 'complete' ? 'done' : 'active',
     });
     contracts.push({
-      title: 'HUNT: WARDEN-9', tag: m.hunt.status === 'complete' ? 'COMPLETE' : 'CONTRACT',
-      sub: m.hunt.status === 'complete' ? 'Target eliminated' : this.enemies.eliteAggro ? 'Target engaged · shoot off the helmet' : 'Last seen near the Halcyon reactor',
+      title: '추적: WARDEN-9', tag: m.hunt.status === 'complete' ? '완료' : '계약',
+      sub: m.hunt.status === 'complete' ? '목표 제거됨' : this.enemies.eliteAggro ? '목표와 교전 중 · 헬멧을 벗기세요' : '할시온 원자로 근처에서 마지막으로 목격됨',
       state: m.hunt.status === 'complete' ? 'done' : 'active',
     });
-    let exSub = 'Complete both contracts to unlock';
+    let exSub = '두 계약을 모두 완료하면 해금';
     let exState: ContractView['state'] = 'locked';
-    if (ex.state === 'available') { exSub = 'Signal RAVEN 2-1 from the LZ radio [E]'; exState = 'active'; }
-    else if (ex.state === 'called') { exSub = `Helicopter ETA ${Math.ceil(ex.countdown)}s · hold the LZ`; exState = 'active'; }
-    else if (ex.state === 'landed') { exSub = 'BOARD THE HELICOPTER [E]'; exState = 'active'; }
-    contracts.push({ title: 'EXTRACTION', tag: ex.state === 'locked' ? 'LOCKED' : 'EXFIL', sub: exSub, state: exState,
+    if (ex.state === 'available') { exSub = 'LZ 무전기로 RAVEN 2-1에 신호 [E]'; exState = 'active'; }
+    else if (ex.state === 'called') { exSub = `헬기 도착까지 ${Math.ceil(ex.countdown)}초 · LZ 사수`; exState = 'active'; }
+    else if (ex.state === 'landed') { exSub = '헬기 탑승 [E]'; exState = 'active'; }
+    contracts.push({ title: '탈출', tag: ex.state === 'locked' ? '잠금' : '탈출', sub: exSub, state: exState,
       progress: ex.state === 'called' ? 1 - ex.countdown / MISSION.extractionCountdown : undefined });
 
     // Prompt
@@ -897,12 +906,12 @@ export class Game {
     const it = this.currentInteraction;
     if (it) {
       switch (it.kind) {
-        case 'crate': prompt = '<kbd>E</kbd> Search supply cache'; break;
-        case 'station': prompt = this.station ? null : it.station === 'buy' ? '<kbd>E</kbd> Open Quartermaster station' : '<kbd>E</kbd> Open Armory upgrade bench'; break;
-        case 'transmitter': prompt = '<kbd>E</kbd> Activate uplink relay <span class="cost">CONTRACT</span>'; break;
-        case 'radio': prompt = ex.state === 'available' ? '<kbd>E</kbd> Signal extraction <span class="cost">STARTS FINAL HORDE</span>'
-          : ex.state === 'locked' ? 'Extraction radio <span class="denied">COMPLETE BOTH CONTRACTS</span>' : null; break;
-        case 'board': prompt = '<kbd>E</kbd> Board the helicopter'; break;
+        case 'crate': prompt = '<kbd>E</kbd> 보급품 캐시 수색'; break;
+        case 'station': prompt = this.station ? null : it.station === 'buy' ? '<kbd>E</kbd> 보급소 열기' : '<kbd>E</kbd> 무기고 개조대 열기'; break;
+        case 'transmitter': prompt = '<kbd>E</kbd> 업링크 중계기 가동 <span class="cost">계약</span>'; break;
+        case 'radio': prompt = ex.state === 'available' ? '<kbd>E</kbd> 탈출 신호 <span class="cost">최종 떼거리 시작</span>'
+          : ex.state === 'locked' ? '탈출 무전기 <span class="denied">두 계약 모두 완료 필요</span>' : null; break;
+        case 'board': prompt = '<kbd>E</kbd> 헬기 탑승'; break;
       }
     }
     const other = this.loadout.slots[this.loadout.active === 0 ? 1 : 0];
@@ -914,7 +923,7 @@ export class Game {
     const stats = w ? effectiveStats(w.id, w.tier) : null;
     this.hud.update(dt, {
       remaining: m.remaining, finalPhase: m.finalPhase,
-      timerLabel: m.finalPhase ? 'EXFIL WINDOW' : 'MISSION',
+      timerLabel: m.finalPhase ? '탈출 제한시간' : '미션',
       contracts, region: regionAt(p.pos.z),
       health: v.health, armor: v.armor, plates: v.plates, grenades: this.loadout.grenades, cash: this.loadout.cash,
       weaponName: w ? WEAPONS[w.id].name : '', tier: w?.tier ?? 0, mag: w?.mag ?? 0, magSize: stats?.magSize ?? 1, reserve: w?.reserve ?? 0,
@@ -930,16 +939,16 @@ export class Game {
 
     // Waypoints
     const wps: WaypointView[] = [];
-    if (d.status !== 'complete') wps.push({ x: poi.transmitter.x, y: 4, z: poi.transmitter.z, kind: 'contract', icon: 'D', label: d.status === 'active' ? 'DEFEND' : 'UPLINK' });
-    if (ex.state !== 'locked' && ex.state !== 'boarded') wps.push({ x: poi.lzPad.x, y: 2.5, z: poi.lzPad.z, kind: 'lz', icon: 'H', label: ex.state === 'landed' ? 'BOARD' : 'EXFIL' });
+    if (d.status !== 'complete') wps.push({ x: poi.transmitter.x, y: 4, z: poi.transmitter.z, kind: 'contract', icon: 'D', label: d.status === 'active' ? '방어' : '업링크' });
+    if (ex.state !== 'locked' && ex.state !== 'boarded') wps.push({ x: poi.lzPad.x, y: 2.5, z: poi.lzPad.z, kind: 'lz', icon: 'H', label: ex.state === 'landed' ? '탑승' : '탈출' });
     if (eliteZ && eliteZ.alive && m.hunt.status !== 'complete') {
       if (eliteVisible) wps.push({ x: eliteZ.pos.x, y: eliteZ.pos.y + 2.8, z: eliteZ.pos.z, kind: 'elite', icon: '!', label: 'WARDEN-9' });
-      else wps.push({ x: poi.reactor.x, y: 6, z: poi.reactor.z + 12, kind: 'elite', icon: '!', label: 'HUNT' });
+      else wps.push({ x: poi.reactor.x, y: 6, z: poi.reactor.z + 12, kind: 'elite', icon: '!', label: '추적' });
     }
     if (this.station === null) {
       for (const s of poi.stations) {
         const dd = Math.hypot(s.x - p.pos.x, s.z - p.pos.z);
-        if (dd < 30 && dd > 3) wps.push({ x: s.x, y: 2.4, z: s.z, kind: s.kind === 'buy' ? 'buy' : 'upgrade', icon: s.kind === 'buy' ? '$' : 'U', label: s.kind === 'buy' ? 'QUARTERMASTER' : 'ARMORY' });
+        if (dd < 30 && dd > 3) wps.push({ x: s.x, y: 2.4, z: s.z, kind: s.kind === 'buy' ? 'buy' : 'upgrade', icon: s.kind === 'buy' ? '$' : 'U', label: s.kind === 'buy' ? '보급소' : '무기고' });
       }
     }
     this.hud.updateWaypoints(wps, this.renderer.camera, p.pos.x, p.pos.z);
@@ -1060,4 +1069,4 @@ export class Game {
   cancelPlate(): void {
     cancelPlate(this.player.vitals);
   }
-}
+      }
