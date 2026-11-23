@@ -406,7 +406,7 @@ export class Level {
     fenceTop(-70, -108, -70, 98);
     fenceTop(70, -108, 70, 98);
     // Quarantine signs along the walls
-    const qs = ['QUARANTINE ZONE', 'NO ENTRY - LETHAL FORCE AUTHORISED'];
+    const qs = ['격리 구역', '출입 금지 - 무력 사용 승인'];
     for (const z of [-80, -40, 10, 45, 85]) {
       this.sign(qs, -69.15, 3, z, Math.PI / 2, 4, 1.4, { bg: '#c9a227', fg: '#111', hazard: true });
       this.sign(qs, 69.15, 3, z + 7, -Math.PI / 2, 4, 1.4, { bg: '#c9a227', fg: '#111', hazard: true });
@@ -430,7 +430,7 @@ export class Level {
     // Insertion gate: closed checkpoint gate behind the player spawn
     this.solid(-8, 0, 98.6, 8, 5, 99.2, M.metalDark, 2);
     for (let i = 0; i < 8; i++) this.vis(-7.6 + i * 2, 0.3, 98.4, -7.2 + i * 2, 4.8, 98.6, M.hazardYellow, 1);
-    this.sign(['QUARANTINE CHECKPOINT 7', 'JOINT TASK FORCE ARGUS'], 0, 4.1, 98.35, Math.PI, 7, 1.6, { bg: '#1b1f1c', fg: '#e8e2cf', border: '#c9a227' });
+    this.sign(['격리 검문소 7', '합동 특수임무부대 아르구스'], 0, 4.1, 98.35, Math.PI, 7, 1.6, { bg: '#1b1f1c', fg: '#e8e2cf', border: '#c9a227' });
   }
 
   private buildLowDistrict(): void {
@@ -439,7 +439,7 @@ export class Level {
     this.building({
       x0: -28, z0: 76, x1: -12, z1: 92, h: 7.5, wall: M.brick, trim: M.concrete, enterable: true, interiorH: 3.4,
       doors: [{ side: 'e', a: 82, b: 84.6, h: 2.6 }, { side: 'n', a: -21, b: -19, h: 2.5 }],
-      sign: { text: ['PHARMACY', '24 HR'], side: 'e', bg: '#1c3b2f', fg: '#7dffb0', y: 3.3, w: 5, glow: true }, lit: 0.1, roofClutter: true,
+      sign: { text: ['약국', '24시간'], side: 'e', bg: '#1c3b2f', fg: '#7dffb0', y: 3.3, w: 5, glow: true }, lit: 0.1, roofClutter: true,
     });
     this.prop('shelf', -24, 80, 0); this.prop('shelf', -24, 84, 0); this.prop('shelf', -18, 80, 0);
     this.prop('counter', -16, 88.5, 0); this.prop('shelf', -26.9, 88, 1);
@@ -449,7 +449,7 @@ export class Level {
     this.building({
       x0: 12, z0: 76, x1: 30, z1: 94, h: 6.5, wall: M.plasterBlue, trim: M.concreteDark, enterable: true, interiorH: 4.2,
       doors: [{ side: 'w', a: 80, b: 88, h: 3.6 }, { side: 'n', a: 24, b: 26, h: 2.4 }],
-      sign: { text: ['MERIDIAN AUTO', 'REPAIR · TIRES'], side: 'w', bg: '#2a2d31', fg: '#f0b04a', y: 4.8, w: 6 }, lit: 0.05,
+      sign: { text: ['메리디안 정비', '수리 · 타이어'], side: 'w', bg: '#2a2d31', fg: '#f0b04a', y: 4.8, w: 6 }, lit: 0.05,
     });
     // Half-closed roller shutter on the north door: only a crouching player fits (1.25m gap).
     this.solid(24, 1.25, 75.95, 26, 2.4, 76.35, M.corrugated, 1, { surface: 'metal' });
@@ -459,10 +459,10 @@ export class Level {
     // --- Solid blocks -----------------------------------------------------------------------
     this.building({ x0: -64, z0: 76, x1: -32, z1: 98, h: 12, wall: M.brickDark, trim: M.concrete, lit: 0.08, roofClutter: true });
     this.building({ x0: 36, z0: 78, x1: 66, z1: 98, h: 10, wall: M.plaster, trim: M.concreteDark, lit: 0.07, roofClutter: true,
-      sign: { text: ['HOTEL VANTAGE'], side: 'w', bg: '#401d1d', fg: '#ffcf8a', y: 7, w: 7, glow: true } });
+      sign: { text: ['호텔 밴티지'], side: 'w', bg: '#401d1d', fg: '#ffcf8a', y: 7, w: 7, glow: true } });
     this.building({ x0: -64, z0: 40, x1: -42, z1: 54, h: 9, wall: M.brick, trim: M.concrete, lit: 0.05 });
     this.building({ x0: -36, z0: 40, x1: -12, z1: 54, h: 11, wall: M.plaster, trim: M.concreteDark, lit: 0.08, roofClutter: true,
-      sign: { text: ['CIVIC RECORDS'], side: 's', bg: '#23282c', fg: '#d8d4c8', y: 4.5, w: 6 } });
+      sign: { text: ['시립 기록관'], side: 's', bg: '#23282c', fg: '#d8d4c8', y: 4.5, w: 6 } });
     // --- Insertion checkpoint ----------------------------------------------------------------
     this.prop('humvee', -4, 87, 0);
     this.prop('truck', 5.5, 93.5, 2);
@@ -519,7 +519,7 @@ export class Level {
       x0: -60, z0: -8, x1: -20, z1: 26, h: 10, wall: M.corrugated, trim: M.metalDark, enterable: true, interiorH: 8.6,
       doors: [{ side: 'e', a: 4, b: 12, h: 5.2 }, { side: 'n', a: -42, b: -39.6, h: 2.5 }, { side: 's', a: -32, b: -29.6, h: 2.5 }],
       windows: false, interiorWall: M.corrugatedGreen, floorMat: M.concrete,
-      sign: { text: ['KESSLER FREIGHT', 'DEPOT 4'], side: 'e', bg: '#1e2a36', fg: '#e3e0d6', y: 7.2, w: 9 },
+      sign: { text: ['케슬러 화물', '제4기지'], side: 'e', bg: '#1e2a36', fg: '#e3e0d6', y: 7.2, w: 9 },
     });
     // Roller door frame (raised shutter visible above the opening)
     this.vis(-19.9, 5.2, 3.8, -19.5, 6.2, 12.2, M.corrugated, 1);
@@ -597,7 +597,7 @@ export class Level {
     ring.visible = false;
     this.root.add(ring);
     this.defenseRing = ring;
-    this.sign(['UPLINK RELAY 03', 'ARGUS SIGNALS'], T.x - 1.8, 2.4, T.z + 2.25, 0, 1.8, 0.6, { bg: '#20262a', fg: '#ffb34d' });
+    this.sign(['업링크 중계기 03', '아르구스 통신대'], T.x - 1.8, 2.4, T.z + 2.25, 0, 1.8, 0.6, { bg: '#20262a', fg: '#ffb34d' });
     // Yard clutter
     this.prop('forklift', 40, 20, 0); this.prop('spool', 22, 14, 0); this.prop('spool', 45, 0, 1);
     this.prop('pallets', 58, -1, 0); this.prop('barrel', 36, -2.5, 0); this.prop('barrel', 36.8, -1.8, 0);
@@ -651,9 +651,9 @@ export class Level {
     this.vis(-0.5, 1.0, -26.6, 0, 1.12, -26.4, M.white, 1);
     this.solid(-6.4, 0, -26.8, -5.8, 1.2, -26.2, M.metalDark, 1);
     this.solid(5.8, 0, -26.8, 6.4, 1.2, -26.2, M.metalDark, 1);
-    this.sign(['HALCYON BIOTECHNICA', 'RESTRICTED · BIOHAZARD LEVEL 4'], 0, 5.2, -25.9, 0, 9, 1.8, { bg: '#e6e6e0', fg: '#8a1a14', symbol: 'bio' });
+    this.sign(['할시온 바이오테크니카', '출입제한 · 생물학적 위험 4등급'], 0, 5.2, -25.9, 0, 9, 1.8, { bg: '#e6e6e0', fg: '#8a1a14', symbol: 'bio' });
     this.vis(-6, 4.3, -26.8, 6, 6.2, -26.2, M.metalDark, 1);
-    for (const x of [-30, 25, 60]) this.sign(['BIOHAZARD', 'CONTAMINATION BEYOND'], x, 2.5, -25.95, 0, 3, 1.2, { bg: '#c9a227', fg: '#111', symbol: 'bio' });
+    for (const x of [-30, 25, 60]) this.sign(['생물학적 위험', '이 지점부터 오염'], x, 2.5, -25.95, 0, 3, 1.2, { bg: '#c9a227', fg: '#111', symbol: 'bio' });
     this.shapes.push({ x0: -69, z0: -109, x1: 69, z1: -27, kind: 'compound' });
     this.quad(-69, -109, 69, -27, 0.012, M.concrete, 5);
     // Compound internal road
@@ -713,7 +713,7 @@ export class Level {
       x0: -58, z0: -68, x1: -30, z1: -44, h: 7.5, wall: M.white, trim: M.metalDark, enterable: true, interiorH: 3.6,
       doors: [{ side: 'e', a: -57, b: -54.4, h: 2.6 }, { side: 's', a: -47, b: -44.4, h: 2.6 }, { side: 'n', a: -40, b: -37.6, h: 2.6 }],
       interiorWall: M.white, floorMat: M.metal, lit: 0.12,
-      sign: { text: ['HALCYON LAB B', 'VECTOR ANALYSIS'], side: 's', bg: '#dfe3e3', fg: '#1d3a4a', y: 4.3, w: 6 },
+      sign: { text: ['할시온 연구동 B', '벡터 분석'], side: 's', bg: '#dfe3e3', fg: '#1d3a4a', y: 4.3, w: 6 },
     });
     // Interior partition with a doorway
     this.wallZ(-44, -67.7, -44.3, 3.6, 0.2, M.white, [{ a: -59, b: -56.6, h: 2.4 }, { a: -51, b: -49, h: 2.4 }]);
@@ -754,7 +754,7 @@ export class Level {
     this.prop('container2', -50, -95, 1, 0, true); this.prop('container5', -43.8, -95, 1, 0, true); this.prop('container0', -50, -95, 1, 2.6);
     this.prop('container4', 54, -60, 0, 0, true); this.prop('container1', 54, -52, 0, 0, true);
     this.building({ x0: -20, z0: -104, x1: -2, z1: -92, h: 5, wall: M.concreteDark, trim: M.metalDark, windows: false,
-      sign: { text: ['COLD STORAGE', 'AUTHORISED PERSONNEL'], side: 's', bg: '#3a3f44', fg: '#e0e0da', y: 3.2, w: 5 } });
+      sign: { text: ['냉동 저장고', '허가된 인원만'], side: 's', bg: '#3a3f44', fg: '#e0e0da', y: 3.2, w: 5 } });
     for (const [x, z] of [[-12, -88], [-10.8, -88.6], [12, -95], [13, -94.2], [48, -40], [-60, -34], [-59.2, -34.8], [58, -100]]) this.prop('hazBarrel', x, z, 0);
     for (const [x, z, s] of [[-11, -86.5, 3], [12.5, -93, 4], [47.5, -42, 3.5], [30, -60, 5], [-24, -80, 4]]) {
       const g = new THREE.Mesh(new THREE.CircleGeometry(1, 20), new THREE.MeshBasicMaterial({ color: 0x3aff3a, transparent: true, opacity: 0.35, blending: THREE.AdditiveBlending, depthWrite: false }));
@@ -812,7 +812,7 @@ export class Level {
     this.vis(R.x - 0.35, 0.9, R.z - 0.25, R.x + 0.15, 1.2, R.z + 0.25, M.oliveDark, 1);
     this.vis(R.x + 0.3, 0.9, R.z - 0.02, R.x + 0.34, 2.1, R.z + 0.02, M.steel, 1);
     this.vis(R.x - 0.3, 1.0, R.z + 0.26, R.x + 0.1, 1.15, R.z + 0.27, M.screenGreen, 1, false);
-    this.sign(['EXFIL LZ', 'CALL SIGN: RAVEN 2-1'], 34, 1.4, 38.2, 0, 2.6, 0.9, { bg: '#1b1f1c', fg: '#c9a227' });
+    this.sign(['탈출 LZ', '호출부호: RAVEN 2-1'], 34, 1.4, 38.2, 0, 2.6, 0.9, { bg: '#1b1f1c', fg: '#c9a227' });
     this.solid(33, 0, 38.0, 35, 0.9, 38.15, M.metalDark, 1);
     this.addLight(0xffb060, 10, 22, L.x, 5, L.z, 'steady');
     this.prop('sedan0', 18, 41, 0); this.prop('sedan3', 21, 51, 2); this.prop('sedanBurnt', 58, 40.5, 0); this.prop('van', 60, 50.5, 2);
