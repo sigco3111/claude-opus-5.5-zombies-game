@@ -106,7 +106,7 @@ export class Interactables {
     const hood = new THREE.Mesh(new THREE.BoxGeometry(1.4, 0.12, 0.85), M.oliveDark);
     hood.position.set(0, 1.6, 0.06);
     g.add(hood);
-    const tex = signTexture(['QUARTERMASTER', 'AMMO · ARMOR · ARMS'], { bg: '#06140c', fg: '#58ffa0', w: 512, h: 320 });
+    const tex = signTexture(['보급소', '탄약 · 방어구 · 무기'], { bg: '#06140c', fg: '#58ffa0', w: 512, h: 320 });
     const screen = new THREE.Mesh(new THREE.PlaneGeometry(0.9, 0.56), new THREE.MeshBasicMaterial({ map: tex, color: new THREE.Color(1.6, 1.6, 1.6) }));
     screen.position.set(0, 1.12, 0.356);
     g.add(screen);
@@ -146,7 +146,7 @@ export class Interactables {
     const board = new THREE.Mesh(new THREE.BoxGeometry(2.2, 1.2, 0.06), M.metalDark);
     board.position.set(0, 1.7, -0.47);
     g.add(board);
-    const tex = signTexture(['ARMORY UPGRADE', 'CALIBRATION BENCH'], { bg: '#061220', fg: '#6ac8ff', w: 512, h: 256 });
+    const tex = signTexture(['무기고 개조', '정비 작업대'], { bg: '#061220', fg: '#6ac8ff', w: 512, h: 256 });
     const screen = new THREE.Mesh(new THREE.PlaneGeometry(1.2, 0.6), new THREE.MeshBasicMaterial({ map: tex, color: new THREE.Color(1.5, 1.5, 1.5) }));
     screen.position.set(0, 1.75, -0.43);
     g.add(screen);
